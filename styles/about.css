@@ -1,0 +1,35 @@
+body{
+    background-color: var(--background-color);
+    color: var(--secondary-color)
+}
+
+h1 {
+    color: var(--primary-color);
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0 !important;
+}
+
+.custom-border {
+    border-bottom: 2px solid #fff !important;
+}
+
+.background-transparent {
+    background-color: transparent;
+}
+
+
+.card-title{
+    color: var(--primary-color);
+}
+
+.btn-primary{
+    background-color: var(--primary-color);
+    border: 0px;
+}
+
+.btn-primary:hover{
+    background-color: #fff;
+    color: var(--background-color);
+}

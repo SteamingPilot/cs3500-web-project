@@ -9,3 +9,6 @@
     
 }
 
+#navigation-bar{
+    background-color: var(--background-color) !important;
+}
