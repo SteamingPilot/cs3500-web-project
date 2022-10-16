@@ -6,5 +6,5 @@
 
 .padding{
     padding:8rem !important;
-    background-color: #1A1A1D;
+    background-color: var(--background-color);
 }

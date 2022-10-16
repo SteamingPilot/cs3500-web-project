@@ -1,0 +1,50 @@
+.container-fluid{
+    margin-top: 5%;
+    margin-bottom: 4%;
+}
+
+body{
+    font-family: 'Staatliches', cursive;
+    font-size: 1.5rem;
+    background-color: var(--background-color);
+}
+
+
+header{
+  background: var(--primary-color);
+  padding: 20px;
+ }
+
+header > h1 {
+  color: var(--background-color);
+  text-align: center;
+  font-family: Asap, sans-serif;
+}
+
+
+
+.container{
+    text-align: center;
+
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: capitalize;
+}
+
+#board{
+    color: var(--primary-color);
+}
+
+#score{
+    color: #73042F;
+    margin-right: 15px;
+    font-size: 1.7rem;
+}
+
+#choice{
+    color: #BB5273;
+    font-size: 1.7rem;
+}
