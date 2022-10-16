@@ -15,21 +15,26 @@ h1 {
     border-bottom: 2px solid #fff !important;
 }
 
-.background-transparent {
-    background-color: transparent;
+
+.social-icon {
+    font-size: 100px;
 }
 
-
-.card-title{
-    color: var(--primary-color);
+.bi:hover{
+    cursor: pointer;
+    border-radius: 50%;
+}
+.bi-facebook:hover{
+    color: #4267B2;
+    background-color: white;
 }
 
-.btn-primary{
-    background-color: var(--primary-color);
-    border: 0px;
+.bi-twitter:hover{
+    color: #00acee;
 }
 
-.btn-primary:hover{
-    background-color: #fff;
-    color: var(--background-color);
+.bi-youtube:hover{
+    color: #c4302b;
+
 }
+
