@@ -54,6 +54,11 @@
     border-color: var(--primary-color);
 }
 
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
+
 /* Utilities  */
 .background-transparent {
     background-color: transparent;
