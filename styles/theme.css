@@ -30,6 +30,15 @@
 
 
 /* Some Changes that overwrites the bootstar classes */
+.text-primary{
+    color: var(--primary-color) !important;
+}
+
+.text-secondary{
+    color: var(--secondary-color) !important;
+}
+
+
 .card-title{
     color: var(--primary-color);
 }
@@ -52,6 +61,11 @@
 .btn-outline-success:hover{
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 /* Utilities  */
