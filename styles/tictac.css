@@ -1,0 +1,48 @@
+
+/* backgroung color */
+body {
+    background-color: var(--background-color);
+}
+
+/* toc title text */
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+
+/* table hwight weight configure and responsive properties */
+table {
+    max-width: 420px;
+    max-height: 420px;
+    width: 50vw;
+    height: 50vw;
+    border-spacing: 0px;
+    min-width: 300px;
+    min-height: 300px;
+}
+
+/* getting the table in the middle */
+.center {
+    margin: 0 auto;
+}
+
+/* defining width and height of every cell */
+td {
+    width: 33%;
+    height: 33%;
+}
+
+/* cell's height and weight */
+.cell {
+    height: 100%;
+    width: 100%;
+    font-size: 5vw;
+}
+
+
+/* reset button congifure */
+#reset {
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -1,0 +1,17 @@
+body {
+    background-color: var(--background-color);
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+p {
+    color: var(--secondary-color);
+}
+
+#game-choose {
+    font-size: 20px;
+    color: var(--secondary-color);
+}
