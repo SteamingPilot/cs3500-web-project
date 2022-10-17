@@ -19,7 +19,7 @@
     <title>Play&Chat</title>
 </head>
 <body>
-    
+
     <!-- Navigation Bar -->
     <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Play&Chat</a>
@@ -71,7 +71,7 @@
 
         <div class="row">
             <!-- Game Board  -->
-            <div class="col-8">
+            <div class="col-lg-8 col-md-12 col-sm-12">
                 <div id="board" class="container mb-5">
                     <div class="row justify-content-center">
                         <div class="tile"></div>
@@ -136,99 +136,108 @@
             </div>
 
             <!-- Chat and Scorboard -->
-            <div class="col-4">
+            <div class="col-lg-4 col-md-12">
 
-                <!-- ScoreBoard  -->
-                <div class="container">
-                    <div class="row">
-                        <div id="scoreboard" class="col-12">
-                            <h3 id="scoreboard-title">Scoreboad</h3>
-                            <table class="table table-sm table-dark table-hover background-transparent">
-                                <thead>
-                                    <tr>
-                                        <th>Player</th>
-                                        <th>Wins</th>
-                                        <th>Loses</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">(You) Player Name</th>
-                                        <td>5</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Opponent Player Name</th>
-                                        <td>3</td>
-                                        <td>5</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat  -->
-                <div class="container border">
-                    <!-- Chat Title  -->
-                    <div id="chat-bar">
-                        <h4 id="chatbar-title" class="pb-2">Chat</h4>
-                    </div>
-
-                    <!-- The Conversation  -->
-                    <div id="chat-coversation" class="container">
-                        <!-- Each row will a message from one Person  -->
-                        <div class="chat row">
-                            <!-- Person Image  -->
-                            <div class="identity">
-                                <img class="person-img" src="../resources/images/paul.jpg" alt="">
-                            </div>
-                            <!-- Message  -->
-                            <div class="message align-self-center ml-5">
-                                <p class="text-secondary">Nice move</p>
-                            </div>
-                        </div>
-
-                        <div class="chat row mt-2">
-                            <div class="identity">
-                                <img class="person-img" src="../resources/images/tarin.jpg" alt="">
-                            </div>
-                            <div class="message align-self-center ml-5">
-                                <p class="text-secondary">Thank you. You also played very well</p>
-                            </div>
-                        </div>
-
-                        <div class="chat row mt-2">
-                            <div class="identity">
-                                <img class="person-img" src="../resources/images/paul.jpg" alt="">
-                            </div>
-                            <div class="message align-self-center ml-5">
-                                <p class="text-secondary">Thanks. Gotta go. Bye</p>
-                            </div>
-                        </div>
-                        <div class="chat row mt-2">
-                            <div class="identity">
-                                <img class="person-img" src="../resources/images/tarin.jpg" alt="">
-                            </div>
-                            <div class="message align-self-center ml-5">
-                                <p class="text-secondary">Bye Bye.</p>
+                <div class="row">
+                    <!-- ScoreBoard  -->
+                    <div class="col-lg-12 col-md-6">
+                        <div class="container">
+                            <div class="row">
+                                <div id="scoreboard">
+                                    <h3 id="scoreboard-title">Scoreboad</h3>
+                                    <table class="table table-sm table-dark table-hover background-transparent">
+                                        <thead>
+                                            <tr>
+                                                <th>Player</th>
+                                                <th>Wins</th>
+                                                <th>Loses</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">(You) Player Name</th>
+                                                <td>5</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Opponent Player Name</th>
+                                                <td>3</td>
+                                                <td>5</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- New Message Chat  -->
-                    <form action="#" class="mt-2">
-                        <div class="row">
-                            <div class="col-9">
-                                <input type="text" class="form-control" id="newMessage" placeholder="Type your message here">
-                            </div>
-                            <div class="col-3">
-                                <button type="submit" class="btn btn-primary">Send</button>
-                            </div>
-                        </div>
-                    </form>
 
+                    <!-- Chat  -->
+                    <div class="col-lg-12 col-md-6">
+                        <div class="container border">
+                            <!-- Chat Title  -->
+                            <div id="chat-bar">
+                                <h4 id="chatbar-title" class="pb-2">Chat</h4>
+                            </div>
+    
+                            <!-- The Conversation  -->
+                            <div id="chat-coversation" class="container">
+                                <!-- Each row will a message from one Person  -->
+                                <div class="chat row">
+                                    <!-- Person Image  -->
+                                    <div class="identity">
+                                        <img class="person-img" src="../resources/images/paul.jpg" alt="">
+                                    </div>
+                                    <!-- Message  -->
+                                    <div class="message align-self-center ml-5">
+                                        <p class="text-secondary">Nice move</p>
+                                    </div>
+                                </div>
+    
+                                <div class="chat row mt-2">
+                                    <div class="identity">
+                                        <img class="person-img" src="../resources/images/tarin.jpg" alt="">
+                                    </div>
+                                    <div class="message align-self-center ml-5">
+                                        <p class="text-secondary">Thank you. You also played very well</p>
+                                    </div>
+                                </div>
+    
+                                <div class="chat row mt-2">
+                                    <div class="identity">
+                                        <img class="person-img" src="../resources/images/paul.jpg" alt="">
+                                    </div>
+                                    <div class="message align-self-center ml-5">
+                                        <p class="text-secondary">Thanks. Gotta go. Bye</p>
+                                    </div>
+                                </div>
+                                <div class="chat row mt-2">
+                                    <div class="identity">
+                                        <img class="person-img" src="../resources/images/tarin.jpg" alt="">
+                                    </div>
+                                    <div class="message align-self-center ml-5">
+                                        <p class="text-secondary">Bye Bye.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- New Message Chat  -->
+                            <form action="#" class="mt-2">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <input type="text" class="form-control" id="newMessage" placeholder="Type your message here">
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+    
+                        </div>
+                    </div>
+                    
                 </div>
+                
 
             </div>
 
