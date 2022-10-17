@@ -53,6 +53,10 @@
     color: var(--background-color);
 }
 
+.btn-primary:active{
+    background-color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+}
 .btn-outline-success{
     color: var(--secondary-color);
     border-color: var(--secondary-color);
@@ -66,6 +70,7 @@
 .dropdown-item.active, .dropdown-item:active {
     color: var(--secondary-color);
     background-color: var(--primary-color);
+    border: 0px solid var(--primary-color) !important;
 }
 
 /* Utilities  */
