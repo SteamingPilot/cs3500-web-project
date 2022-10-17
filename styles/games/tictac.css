@@ -1,4 +1,6 @@
-
+:root{
+    --heading-color: #FFC240;
+}
 /* backgroung color */
 body {
     background-color: var(--background-color);
@@ -12,7 +14,7 @@ h1 {
 
 
 /* table hwight weight configure and responsive properties */
-table {
+#game table {
     max-width: 420px;
     max-height: 420px;
     width: 50vw;
@@ -23,18 +25,18 @@ table {
 }
 
 /* getting the table in the middle */
-.center {
+#game .center {
     margin: 0 auto;
 }
 
 /* defining width and height of every cell */
-td {
+#game td {
     width: 33%;
     height: 33%;
 }
 
 /* cell's height and weight */
-.cell {
+#game .cell {
     height: 100%;
     width: 100%;
     font-size: 5vw;
@@ -45,4 +47,28 @@ td {
 #reset {
     margin-top: 10px;
     font-weight: bold;
+}
+
+#game-title{
+    color: var(--heading-color) !important;
+}
+
+#scoreboard-title{
+    color: var(--heading-color) !important;
+}
+
+#chatbar-title{
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.person-img{
+    height: 45px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.chat{
+    height: 60px;
+    border-bottom: 1px solid var(--secondary-color);
 }
