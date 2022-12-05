@@ -63,7 +63,7 @@ a:hover {
     padding-bottom: 7px;
 }
 
-#req{
+#pwd-no-match{
     color: var(--primary-color) !important;
 }
 

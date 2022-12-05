@@ -74,7 +74,7 @@
             <div class="col-lg-6 col-md-7 col-sm-8"  id="main-form">
 
                 <!-- main form for signup -->
-                <form action="signup-submit.php" method="POST">
+                <form action="signup-submit.php" method="POST" oninput="pwd.setCustomValidity(pwd.value != repwd.value ? 'Passwords do not match.' : '')">
 
                     <!-- Heading text form sign up -->
                     <div>
@@ -84,32 +84,29 @@
                     <div class="container" id="log-form">
                         <!-- having firstname and lastname into the same line -->
                         <div class="row">
-                            <div class="col-12 display-none">
-                              <p id="req">* All fields are required</p>
-                            </div>
-                            <!-- getting firstname -->
+                            <!-- Firstname -->
                             <div class="col">
                                 <label for="fname" class="all-text">First name</label>
-                                <input type="text" id="fname" class="form-control form-control-lg" placeholder="Firstname" required>
+                                <input name="fname" type="text" id="fname" class="form-control form-control-lg" placeholder="Firstname" required>
                             </div>
-                            <!-- getting lastname -->
+                            <!-- Lastname -->
                             <div class="col">
                                 <label for="lname" class="all-text">Last name</label>
-                                <input type="text" id="lname" class="form-control form-control-lg" placeholder="Lastname" required>
+                                <input name="lname" type="text" id="lname" class="form-control form-control-lg" placeholder="Lastname" required>
                             </div>
                         </div><br>
 
                         <!-- email address -->
                         <div class="form-group">
                             <label for="email" id="" class="all-text">Email Address</label>
-                            <input type="email" id="email" class="form-control form-control-lg" placeholder="example@company.com" name="'uname" required>
+                            <input name="email" type="email" id="email" class="form-control form-control-lg" placeholder="example@company.com" name="'uname" required>
                         </div>
         
                         <!-- password and repeat password in the same line -->
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 form-group">
                                 <label for="pwd" class="all-text">Password</label>
-                                <input type="password" id="pwd" class="form-control form-control-lg" placeholder="Enter Password" name="pass" required>
+                                <input name="pwd" type="password" id="pwd" class="form-control form-control-lg" placeholder="Enter Password" name="pass" required>
                             </div>
     
                             <div class="col-lg-6 col-md-12 form-group">
@@ -127,7 +124,7 @@
                         </div>
                         
                         <!-- Sign up button -->
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="signup_submit"><b>Sign Up</b></button>
+                        <button name="signup_submit" type="submit" class="btn btn-primary btn-lg btn-block" id="signup_submit"><b>Sign Up</b></button>
 
                     </div>
                 </form>
