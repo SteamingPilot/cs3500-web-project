@@ -13,7 +13,7 @@ body {
 
 
 /* making all text similar color */
-#all-text {
+.all-text {
     color: var(--secondary-color);
 }
 
@@ -63,3 +63,11 @@ a:hover {
     padding-bottom: 7px;
 }
 
+#req{
+    color: var(--primary-color) !important;
+}
+
+
+.display-none{
+    display: none;
+}
