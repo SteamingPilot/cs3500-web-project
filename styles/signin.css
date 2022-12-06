@@ -71,3 +71,8 @@ a:hover {
 .display-none{
     display: none;
 }
+
+
+.margin-bottom-10{
+    margin-bottom: 10px !important;
+}

@@ -65,7 +65,7 @@
             <div class="col-lg-6 col-md-7 col-sm-8"  id="main-form">
 
                 <!-- main form for sign in -->
-                <form>
+                <form method="POST" action="signin-submit.php">
 
                     <!-- top sign in text -->
                     <div>
@@ -77,23 +77,19 @@
 
                         <!-- username configuraton -->
                         <div class="form-group">
-                            <label for="uname" id="all-text">Username</label>
-                            <input type="text" class="form-control form-control-lg" placeholder="Enter Username" name="'uname" required>
+                            <label for="email" class="all-text">Email</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Enter Email" name="email" id="email" required>
                         </div>
         
                         <!-- password configuration -->
                         <div class="form-group">
-                            <label for="pass" id="all-text">Password</label>
-                            <input type="password" class="form-control form-control-lg" placeholder="Enter Password" name="pass" required>
+                            <label for="pwd" class="all-text">Password</label>
+                            <input type="password" class="form-control form-control-lg" placeholder="Enter Password" name="pwd" id="pwd" required>
                         </div>
                         
                         <!-- remember me and forgot password into a same div -->
-                        <div class="form-group form-check">
-                            <!-- remeber me -->
-                            <input type="checkbox" class="form-check-input" id="remember">
-                            <label class="remember" for="rememberme" id="all-text">Remember me</label>
-                            <!-- forgot password -->
-                            <span class="psw"><a href="#"><u>Forgot/Change Password</u></a></span>
+                        <div class="form-group margin-bottom-10">
+                          <div class=""><a href="#"><u>Forgot/Change Password</u></a></div>
                         </div>
                         
                         <!-- Sign in Button -->
