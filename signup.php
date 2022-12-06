@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_GET['success'])){
+  echo'<script>alert("Email already exists. Try again with a different email")</script>';
+}
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +36,7 @@
     <title>Sign Up</title>
 </head>
 <body>
+
 
  <!-- Navigation Bar  -->
  <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -87,12 +97,24 @@
                             <!-- Firstname -->
                             <div class="col">
                                 <label for="fname" class="all-text">First name</label>
-                                <input name="fname" type="text" id="fname" class="form-control form-control-lg" placeholder="Firstname" required>
+                                <input 
+                                value="<?php 
+                                  if(isset($_GET['fname'])) {
+                                    echo $_GET['fname'];
+                                  }
+                                ?>"
+                                name="fname" type="text" id="fname" class="form-control form-control-lg" placeholder="Firstname" required>
                             </div>
                             <!-- Lastname -->
                             <div class="col">
                                 <label for="lname" class="all-text">Last name</label>
-                                <input name="lname" type="text" id="lname" class="form-control form-control-lg" placeholder="Lastname" required>
+                                <input 
+                                value="<?php 
+                                  if(isset($_GET['lname'])) {
+                                    echo $_GET['lname'];
+                                  }
+                                ?>"
+                                name="lname" type="text" id="lname" class="form-control form-control-lg" placeholder="Lastname" required>
                             </div>
                         </div><br>
 

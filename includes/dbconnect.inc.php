@@ -12,7 +12,7 @@ try{
 
     echo "Success";
 } catch(PDOException $e){
-    alert("Failed to connect to the Database. Try again later!");
+    echo '<script>alert("Failed to connect to the Database. Try again later!");</script>';
 }
 
 
