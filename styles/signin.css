@@ -76,3 +76,7 @@ a:hover {
 .margin-bottom-10{
     margin-bottom: 10px !important;
 }
+
+.req-field{
+    color: var(--primary-color) !important;
+}

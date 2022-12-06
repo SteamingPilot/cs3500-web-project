@@ -1,3 +1,6 @@
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,15 +19,13 @@
     <!-- css for individula page -->
     <link rel="stylesheet" href="styles/signin.css">
 
-    <title>Login</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
-  <!-- Using Ajax to check for login  -->
-  <script>
-    $(function(){
+
+
       
-    })
-
-  </script>
+    <title>Login</title>
 
 </head>
 <body>
@@ -68,15 +69,12 @@
 
     <!-- main container -->
     <div class = "container">
-
-
-
         <!-- getting the form into the center -->
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-7 col-sm-8"  id="main-form">
 
                 <!-- main form for sign in -->
-                <form method="POST" action="signin-submit.php">
+                <form>
 
                     <!-- top sign in text -->
                     <div>
@@ -88,6 +86,7 @@
 
                         <!-- username configuraton -->
                         <div class="form-group">
+                            <p class="req-field" id="req-text"></p>
                             <label for="email" class="all-text">Email</label>
                             <input type="text" class="form-control form-control-lg" placeholder="Enter Email" name="email" id="email" required>
                         </div>
@@ -104,7 +103,7 @@
                         </div>
                         
                         <!-- Sign in Button -->
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="log-btn"><b>Sign in</b></button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="signin-submit" name="signin-submit"><b>Sign in</b></button>
                     </div>
                 </form>
 
@@ -123,11 +122,59 @@
             </div>
         </div>
         
-    <div> 
+    </div> 
 
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Boot Strap JS,not needed for the time being but may use it in the future -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+
+
+    <!-- Using Ajax to check for login  -->
+    <script>
+      $(document).ready(function(){
+        $("#req-text").html("");
+
+        $("#signin-submit").click(function (e) { 
+            e.preventDefault();
+            if($("#email").val() == "" || $("#pwd").val() == ""){
+                $("#req-text").html("* All fields are required");
+            } else {
+                var email = $("#email").val();
+                var pwd = $("#pwd").val();
+
+                var formData = {
+                    "email": email,
+                    "pwd": pwd,
+                    "signin-submit": 1
+                };
+
+                $.ajax({
+                    type:  "POST",
+                    url: "signin-submit.php",
+                    data: formData,
+                    success: function(data) {
+                        if(data == "UserInvalid"){
+                            $("#req-text").html("Invalid email");
+                        }
+                        else if(data == "PasswordInvalid"){
+                            $("#req-text").html("Invalid Password");
+                        }
+                        else{
+                            window.location.replace("index.php");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
+                    }
+                });
+            }
+          
+        });
+      });
+
+
+    </script>
 </body>
 </html>
