@@ -2,3 +2,26 @@
 body {
     background-color: var(--background-color);
 }
+
+p {
+    color: green !important;
+}
+
+/* making all text similar color */
+.all-text {
+    color: var(--secondary-color);
+}
+
+/* aligning to a appropiate position */
+.container {
+    padding-top: 100px;
+}
+
+/* ancore tag color-change */
+a {
+    color: var(--primary-color);
+}
+/* hover color change */
+a:hover {
+    color: var(--secondary-color)
+}

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/theme.css">
 
     <!-- css for individula page -->
-    <link rel="stylesheet" href="styles/signin.css">
+    <!-- <link rel="stylesheet" href="styles/signin.css" -->
     <link rel="stylesheet" href="styles/signup-submit.css">
 
     <?php
@@ -92,10 +92,13 @@
 
   <div class = "container">
     <div class = "row justify-content-center">
-        <h1 id = "title-text">Thank you for signing up.</h1>
+        <p class = "all-text">Account created successfully</p>
     </div>
     <div class = "row justify-content-center">
-        <h3 id = "all-text">Go to <a href="singin.php">sign in</a></h3>
+        <h1 class = "all-text">Thank you for signing up.</h1>
+    </div>
+    <div class = "row justify-content-center">
+        <h3 class = "all-text">Go to <a href="singin.php">sign in</a></h3>
     </div>
   </div>
 
