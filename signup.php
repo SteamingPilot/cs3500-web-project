@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_GET['success'])){
+  echo'<script>alert("Email already exists. Try again with a different email")</script>';
+}
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +25,18 @@
     <!-- css for indivudal page -->
     <link rel="stylesheet" href="styles/signin.css">
 
+
+    <!-- Custom JS  -->
+    <script src="js/signup.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+
     <title>Sign Up</title>
 </head>
 <body>
+
 
  <!-- Navigation Bar  -->
  <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -66,7 +84,7 @@
             <div class="col-lg-6 col-md-7 col-sm-8"  id="main-form">
 
                 <!-- main form for signup -->
-                <form>
+                <form action="signup-submit.php" method="POST" oninput="pwd.setCustomValidity(pwd.value != repwd.value ? 'Passwords do not match.' : '')">
 
                     <!-- Heading text form sign up -->
                     <div>
@@ -74,50 +92,61 @@
                     </div>
 
                     <div class="container" id="log-form">
-
                         <!-- having firstname and lastname into the same line -->
                         <div class="row">
-                            <!-- getting firstname -->
+                            <!-- Firstname -->
                             <div class="col">
-                                <label for="fname" id="all-text">First name</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Firstname">
+                                <label for="fname" class="all-text">First name</label>
+                                <input 
+                                value="<?php 
+                                  if(isset($_GET['fname'])) {
+                                    echo $_GET['fname'];
+                                  }
+                                ?>"
+                                name="fname" type="text" id="fname" class="form-control form-control-lg" placeholder="Firstname" required>
                             </div>
-                            <!-- getting lastname -->
+                            <!-- Lastname -->
                             <div class="col">
-                                <label for="lname" id="all-text">Last name</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Lastname" required>
+                                <label for="lname" class="all-text">Last name</label>
+                                <input 
+                                value="<?php 
+                                  if(isset($_GET['lname'])) {
+                                    echo $_GET['lname'];
+                                  }
+                                ?>"
+                                name="lname" type="text" id="lname" class="form-control form-control-lg" placeholder="Lastname" required>
                             </div>
                         </div><br>
 
                         <!-- email address -->
                         <div class="form-group">
-                            <label for="email" id="all-text">Email Address</label>
-                            <input type="email" class="form-control form-control-lg" placeholder="example@company.com" name="'uname" required>
+                            <label for="email" id="" class="all-text">Email Address</label>
+                            <input name="email" type="email" id="email" class="form-control form-control-lg" placeholder="example@company.com" name="'uname" required>
                         </div>
         
                         <!-- password and repeat password in the same line -->
                         <div class="row">
                             <div class="col-lg-6 col-sm-12 form-group">
-                                <label for="pass" id="all-text">Password</label>
-                                <input type="password" class="form-control form-control-lg" placeholder="Enter Password" name="pass" required>
+                                <label for="pwd" class="all-text">Password</label>
+                                <input name="pwd" type="password" id="pwd" class="form-control form-control-lg" placeholder="Enter Password" name="pass" required>
                             </div>
     
                             <div class="col-lg-6 col-md-12 form-group">
-                                <label for="repass" id="all-text">Repeat Password</label>
-                                <input type="password" class="form-control form-control-lg" placeholder="Re Enter Password" name="repass" required>
+                                <label for="repwd" class="all-text">Repeat Password</label>
+                                <input type="password" id="repwd" class="form-control form-control-lg" placeholder="Re Enter Password" name="repass" required>
                             </div>
                         </div>
 
                         <!-- policy agreement texts -->
                         <div class="col-md-12">
-                            <small id="all-text" class=>People who use our service, their profile will be shared with others. <a href="#"><u>Learn more. </u></a>
+                            <small class="all-text" class=>People who use our service, their profile will be shared with others. <a href="#"><u>Learn more. </u></a>
                                 <br>
                                 By clicking Sign Up, you agree to our <a href="#"><u>Terms, Privacy Policy</u></a> and <a href="#"><u>Cookies Policy</u></a>. 
                                 You may receive SMS Notifications from us and can opt out any time.</small>
                         </div>
                         
                         <!-- Sign up button -->
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="log-btn"><b>Sign Up</b></button>
+                        <button name="signup_submit" type="submit" class="btn btn-primary btn-lg btn-block" id="signup_submit"><b>Sign Up</b></button>
 
                     </div>
                 </form>
