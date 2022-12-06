@@ -1,3 +1,19 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['UserId'])){
+        $uid = $_SESSION['UserId'];
+        $ufname = $_SESSION['UserFirstName'];
+        $ulname = $_SESSION['UserLastName'];
+    } else{
+        $uid = NULL;
+    }
+
+?>
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,14 +70,34 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <a class="btn btn-primary ml-3" href="singin.php">Sign In</a>
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+            <?php 
+            if($uid == NULL){
+                echo '<a class="btn btn-primary ml-3" href="singin.php">Sign In</a>';
+                
+            }
+            ?>
+
+
+
           </form>
         </div>
     </nav>
-
     <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <?php
+                    if($uid != NULL){
+                        echo "<h4 class='color-primary'>Hello $ufname, choose a game to play from the top menu</h4>";
+                    }
+                ?>
+
+            </div>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-12 text-center ">
                 <img src="resources/gifs/image001.gif" alt="Teamwork" class="img-fluid" id="teamwork-gif">

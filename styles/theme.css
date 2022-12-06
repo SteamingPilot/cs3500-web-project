@@ -77,3 +77,16 @@
 .background-transparent {
     background-color: transparent;
 }
+
+
+.color-primary{
+    color: var(--primary-color)  !important;
+}
+
+.color-secondary{
+    color: var(--secondary-color)  !important;
+}
+
+.color-background{
+    color: var(--background-color)  !important;
+}
