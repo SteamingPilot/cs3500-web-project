@@ -1,3 +1,16 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION['UserId'])){
+        $uid = $_SESSION['UserId'];
+        $ufname = $_SESSION['UserFirstName'];
+        $ulname = $_SESSION['UserLastName'];
+    } else{
+        $uid = NULL;
+    }
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -52,7 +65,14 @@
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          <a class="btn btn-primary ml-3" href="singin.php">Sign In</a>
+
+          <!-- If Signed in don't show the sign in button  -->
+          <?php 
+                if($uid == NULL){
+                    echo '<a class="btn btn-primary ml-3" href="singin.php">Sign In</a>';
+                    
+                }
+            ?>
         </form>
       </div>
     </nav>
