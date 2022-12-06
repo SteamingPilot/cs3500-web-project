@@ -10,7 +10,6 @@ try{
 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Success";
 } catch(PDOException $e){
     echo '<script>alert("Failed to connect to the Database. Try again later!");</script>';
 }
