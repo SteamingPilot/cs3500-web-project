@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/RPS.css">
+    <link rel="stylesheet" href="../styles/rockpaperscissors.css">
 
 
      <!-- Theme -->
@@ -16,7 +16,7 @@
 
 <!-- Navigation bar  -->
     <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="../index.html">Play&Chat</a>
+        <a class="navbar-brand" href="../index.php">Play&Chat</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,30 +24,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="../index.html">Home</a>
+              <a class="nav-link" href="../index.php">Home</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                   Games
                 </a>
                 <div class="dropdown-menu active">
-                  <a class="dropdown-item" href="tictac.html">Tic Tac Toe</a>
+                  <a class="dropdown-item" href="tictac.php">Tic Tac Toe</a>
                   <a class="dropdown-item active" href="#">Rock, Paper, Scissor</a>
-                  <a class="dropdown-item" href="connect4.html">Connect 4</a>
+                  <a class="dropdown-item" href="connect4.php">Connect 4</a>
                 </div>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="../about.html">About Us</a>
+              <a class="nav-link" href="../about.php">About Us</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="../contactus.html">Contact</a>
+              <a class="nav-link" href="../contact.php">Contact</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <a class="btn btn-primary ml-3" href="../singin.html">Sign In</a>
+            <a class="btn btn-primary ml-3" href="../singin.php">Sign In</a>
           </form>
         </div>
       </nav>

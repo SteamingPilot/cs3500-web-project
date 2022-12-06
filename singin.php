@@ -21,7 +21,7 @@
 <body>
  <!-- Navigation Bar  -->
  <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">Play&Chat</a>
+    <a class="navbar-brand" href="index.php">Play&Chat</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,24 +29,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
               Games
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="games/tictac.html">Tic Tac Toe</a>
-              <a class="dropdown-item" href="games/rps.html">Rock, Paper, Scissor</a>
-              <a class="dropdown-item" href="games/connect4.html">Connect 4</a>
+              <a class="dropdown-item" href="games/tictac.php">Tic Tac Toe</a>
+              <a class="dropdown-item" href="games/rockpaperscissors.php">Rock, Paper, Scissor</a>
+              <a class="dropdown-item" href="games/connect4.php">Connect 4</a>
             </div>
           </li>
         <li class="nav-item">
-          <a class="nav-link" href="about.html">About Us</a>
+          <a class="nav-link" href="about.php">About Us</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="CONTACTUS.html">Contact</a>
+          <a class="nav-link" href="contact.php">Contact</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -110,7 +110,7 @@
                     
                     <!-- create new account button -->
                     <div class="col-md-12 text-center">
-                        <a href="signup.html" class="btn btn-success">Create New Account</a>
+                        <a href="signup.php" class="btn btn-success">Create New Account</a>
                     </div>
                 </div>
             </div>
