@@ -25,7 +25,7 @@
     
     <!-- Navigation bar -->
     <nav id="navigation-bar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">Play&Chat</a>
+        <a class="navbar-brand" href="index.php">Play&Chat</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,23 +40,23 @@
                   Games
                 </a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="games/tictac.html">Tic Tac Toe</a>
-                  <a class="dropdown-item" href="games/rps.html">Rock, Paper, Scissor</a>
-                  <a class="dropdown-item" href="games/connect4.html">Connect 4</a>
+                  <a class="dropdown-item" href="games/tictac.php">Tic Tac Toe</a>
+                  <a class="dropdown-item" href="games/rockpaperscissors.php">Rock, Paper, Scissor</a>
+                  <a class="dropdown-item" href="games/connect4.php">Connect 4</a>
                 </div>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="about.php">About Us</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="CONTACTUS.html">Contact</a>
+              <a class="nav-link" href="contact.php">Contact</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <a class="btn btn-primary ml-3" href="singin.html">Sign In</a>
+            <a class="btn btn-primary ml-3" href="singin.php">Sign In</a>
           </form>
         </div>
     </nav>
@@ -84,7 +84,7 @@
             <div class="card-body border-bottom border-left border-right border-white">
               <h5 class="card-title">Connect 4</h5>
               <p class="card-text">It is the classic game you love to play with your friends and family. Can you connect four of your coloured disks by dropping them into the holder before your opponent does?</p> <br>
-              <a href="games/connect4.html" class="btn btn-primary">Play Connect 4</a>
+              <a href="games/connect4.php" class="btn btn-primary">Play Connect 4</a>
             </div>
           </div>
 
@@ -97,7 +97,7 @@
               <div class="card-body border-bottom border-left border-right border-white">
                 <h5 class="card-title">Rock Paper Scissor</h5>
                 <p class="card-text">Rock wins against scissors; paper wins against rock; and scissors wins against paper. If both players throw the same hand signal, it is considered a tie, and play resumes until there is a clear winner.</p>
-                <a href="games/connect4.html" class="btn btn-primary">Play Rock Paper Scissor</a>
+                <a href="games/connect4.php" class="btn btn-primary">Play Rock Paper Scissor</a>
               </div>
             </div>
   
@@ -109,7 +109,7 @@
             <div class="card-body border-bottom border-left border-right border-white">
               <h5 class="card-title">Tic Tac Toe</h5>
               <p class="card-text">Tic-tac-toe, noughts and crosses, or Xs and Os is a paper-and-pencil game for two players who take turns marking the spaces in a three-by-three grid with X or O. The player who succeeds placing three of their marks is the winner</p>
-              <a href="games/connect4.html" class="btn btn-primary">Play Tic Tac Toe</a>
+              <a href="games/connect4.php" class="btn btn-primary">Play Tic Tac Toe</a>
             </div>
           </div>
 
