@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="styles/signin.css">
 
     <title>Login</title>
+
+  <!-- Using Ajax to check for login  -->
+  <script>
+    $(function(){
+      
+    })
+
+  </script>
+
 </head>
 <body>
  <!-- Navigation Bar  -->
@@ -59,6 +68,8 @@
 
     <!-- main container -->
     <div class = "container">
+
+
 
         <!-- getting the form into the center -->
         <div class="row justify-content-center">
