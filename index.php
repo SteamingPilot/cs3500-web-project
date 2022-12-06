@@ -47,32 +47,33 @@
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Games
-                </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="games/tictac.php">Tic Tac Toe</a>
-                  <a class="dropdown-item" href="games/rockpaperscissors.php">Rock, Paper, Scissor</a>
-                  <a class="dropdown-item" href="games/connect4.php">Connect 4</a>
-                </div>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.php">About Us</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="contact.php">Contact</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Games
+                    </a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="games/tictac.php">Tic Tac Toe</a>
+                    <a class="dropdown-item" href="games/rockpaperscissors.php">Rock, Paper, Scissor</a>
+                    <a class="dropdown-item" href="games/connect4.php">Connect 4</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="about.php">About Us</a>
+                </li>
+                
+                <li class="nav-item">
+                <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
+            <!-- If Signed in don't show the sign in button  -->
             <?php 
             if($uid == NULL){
                 echo '<a class="btn btn-primary ml-3" href="singin.php">Sign In</a>';
@@ -87,11 +88,11 @@
     </nav>
     <div class="container">
 
-        <div class="row">
+        <div class="row mt-md-5">
             <div class="col-12">
                 <?php
                     if($uid != NULL){
-                        echo "<h4 class='color-primary'>Hello $ufname, choose a game to play from the top menu</h4>";
+                        echo "<h4 class='color-secondary'>Hello $ufname, choose a game to play from the top menu</h4>";
                     }
                 ?>
 
@@ -159,6 +160,7 @@
 
     <br>
     <br><br><br>
+
     <!-- BootStarp Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

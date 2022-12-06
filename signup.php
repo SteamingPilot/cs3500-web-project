@@ -1,8 +1,17 @@
 <?php
 
-if(isset($_GET['success'])){
-  echo'<script>alert("Email already exists. Try again with a different email")</script>';
-}
+    session_start();
+
+    if(isset($_SESSION['UserId'])){
+        header("Location: index.php");
+    }
+
+
+
+
+    if(isset($_GET['success'])){
+        echo'<script>alert("Email already exists. Try again with a different email")</script>';
+    }
 
 ?>
 
