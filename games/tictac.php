@@ -1,3 +1,6 @@
+<?php include "includes/session.inc.php"; ?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -62,43 +65,58 @@
         <div class="row justify-content-center mb-5">
             <h1 id="game-title" class="display-4">Tic Tac Toe</h1>
         </div>
+        
+        <div class="row" id="newGame">
+            <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+                <form action="" method="" class="form-inline">
+                    <input type="text" class="form-control" id="oldGameId" placeholder="Enter your Game Id here" name="oldGameId">
+                    <button type="submit" class="btn btn-danger ml-2" id="enterOldGame">Enter Game</button>
+                    <button type="submit" class="btn btn-success ml-2" id="enterNewGame">New Game</button>
 
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 mb-3"   >
+                    
+                </form>
+
+                
+            </div>
+
+        </div>
+
+        <div class="row d-none">
+            <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
                 <div id="game" class="center">
 
                     <table class="center">
                         <tr>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">X</button>
+                                <button type="button" id="v0" class="btn btn-outline-danger cell">X</button>
                             </td>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">O</button>
+                                <button type="button" id="v1" class="btn btn-outline-danger cell">O</button>
                             </td>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">X</button>
-                            </td>
-                            <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">O</button>
-                            </td>
-                            <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">X</button>
+                                <button type="button" id="v2" class="btn btn-outline-danger cell">X</button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">O</button>
+                                <button type="button" id="v3" class="btn btn-outline-danger cell">X</button>
                             </td>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">X</button>
+                                <button type="button" id="v4" class="btn btn-outline-danger cell">O</button>
                             </td>
                             <td>
-                                <button type="button" id="c" class="btn btn-outline-danger cell" id="all-input">O</button>
+                                <button type="button" id="v5" class="btn btn-outline-danger cell">X</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" id="v6" class="btn btn-outline-danger cell">O</button>
+                            </td>
+                            <td>
+                                <button type="button" id="v7" class="btn btn-outline-danger cell">X</button>
+                            </td>
+                            <td>
+                                <button type="button" id="v8" class="btn btn-outline-danger cell">O</button>
                             </td>
                         </tr>
                     </table>
