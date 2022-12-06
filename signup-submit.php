@@ -92,13 +92,13 @@
 
   <div class = "container">
     <div class = "row justify-content-center">
-        <p class = "all-text">Account created successfully</p>
+        <h5>Account created successfully</h5>
     </div>
     <div class = "row justify-content-center">
-        <h1 class = "all-text">Thank you for signing up.</h1>
+        <h2>Thank you for creating an account</h1>
     </div>
     <div class = "row justify-content-center">
-        <h3 class = "all-text">Go to <a href="singin.php">sign in</a></h3>
+        <p>Sign in <a href="singin.php">here</a></p>
     </div>
   </div>
 
