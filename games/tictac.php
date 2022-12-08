@@ -1,5 +1,5 @@
 <?php 
-    include "../includes/create-player.inc.php";
+    include "../includes/session.inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -32,35 +32,52 @@
                     echo '$("#notLoggedInContaier").show();';
                 } else{
                     echo '$("#notLoggedInContaier").hide();';
+
+                    if($uIsPlaying == FALSE){
+                        echo '$("#newGame").show();';
+                        echo '$("#gameAndScoreBoard").hide();';
+                        echo '$("#waitingForFriend").hide();';
+                    } else{
+                        echo '$("#newGame").hide();';
+                        echo '$("#gameAndScoreBoard").show();';
+                    }
                 }
 
-                if($player->get_isPlaying() == FALSE){
-                    echo '$("#newGame").show();';
-                    echo '$("#gameAndScoreBoard").hide();';
-                    echo '$("#waitingForFriend").hide();';
-                } else{
-                    echo '$("#newGame").hide();';
-                    echo '$("#gameAndScoreBoard").show();';
-                }
+                
             ?>
 
-            $("#enterNewGame").click(function (e) {                 
+            $("#invite_submit").click(function (e) {                 
                 e.preventDefault();
-                <?php 
-                    $player->create_new_game("---------");
 
-                    if($player->isPlaying){
-                        echo '$("#waitingForFriend").show();';
-                        echo '$("#newGame").hide();';
+                $.post("../actions/invitePlayer.php", {
+                    "invite_submit":"True",
+                    "email": $("#email").val(),
+                    "board": "---------",
+                    "gameType": 1    
+                },
+                    function (data, textStatus, jqXHR) {
+                        console.log(data)
+                        if(data=="Success"){
+                            $('#waitingForFriend').show();
+                            $("#newGame").hide();
+
+                            <?php 
+                            $_SESSION['isPlaying'] = true;
+                            ?>
+
+                        } else if(data == "InvalidEmail"){
+                            alert("No User Found with the emial. Try again");
+                        } else if(data=="Failed"){
+                            alert("Something went wrong. Try again Later.")
+                        }
                     }
-
-
-                ?>
-
-                setInterval(() => {
-                    // Check for friend.
-                }, 1500);
+                );    
+                
             });
+
+
+
+    
 
         });
     </script>
@@ -128,7 +145,7 @@
         <!-- Main Container  -->
         <div class="container-fluid" id="main-container">
 
-            <!-- Create or Enter Game Container  -->
+            <!-- Invite a Friend  -->
             <div class="row" id="newGame">
                 <div class="container">
                     <div class="row mb-3">
@@ -136,15 +153,14 @@
                             <h4 class="color-secondary">
                                 Hi 
                                 <?php echo $ufname;?>
-                                , Enter your Game Id to join a game or Create a New Game to invite your friends.</h4>
+                                , <br>Invite a friend to play</h4>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="inviteAFriend">
                         <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
                             <form action="" method="" class="form-inline">
-                                <input type="text" class="form-control" id="oldGameId" placeholder="Enter your Game Id here" name="oldGameId">
-                                <button type="submit" class="btn btn-danger ml-2" id="enterOldGame" name="enterOldGame">Enter Game</button>
-                                <button type="submit" class="btn btn-success ml-2" id="enterNewGame" name="enterNewGame">New Game</button>
+                                <input type="text" class="form-control" id="email"  name="email"  placeholder="Enter an email to invite">
+                                <button type="submit" class="btn btn-danger ml-2" id="invite_submit" name="invite_submit">Invite</button>
                             </form>
                         </div>
                     </div>
@@ -155,7 +171,7 @@
             <div class="row justify-content-center" id="waitingForFriend">
                 <div class="col-12">
                     <h3 class="color-secondary text-center">
-                        Your Game Id: <?php echo "$player->gameId";?>. Your Friend can join this game by entering this ID.
+                        Your Game Id:. Your Friend can join this game by entering this ID.
                     </h3>
 
 
@@ -335,5 +351,10 @@
     <!-- BootStarp Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     
+
+    <?php
+        include "../actions/check-incoming-invite.php";
+    ?>
+
 </body>
 </html>
