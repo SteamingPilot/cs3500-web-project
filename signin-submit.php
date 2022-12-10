@@ -19,6 +19,10 @@
                     $_SESSION['UserId'] = $res['Id'];
                     $_SESSION["UserFirstName"] = $res['FirstName'];
                     $_SESSION["UserLastName"] = $res["LastName"];
+                    $_SESSION["isPlaying"] = False;
+                    $_SESSION["OpponentId"] = NULL;
+                    $_SESSION["GameId"] = NULL;
+                    $_SESSION["LocalBoard"] = NULL;
                     header("Location: index.php");
                 } else {
 
