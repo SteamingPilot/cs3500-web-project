@@ -36,6 +36,8 @@
 
             if($success){
                 $conn->commit();
+                $_SESSION["gameId"] = $gid;
+                $_SESSION["hasInvited"] = TRUE;
                 echo "Success";
             } else {
                 $conn->rollback();

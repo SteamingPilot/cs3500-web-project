@@ -1,114 +1,182 @@
 <?php
 include "../includes/dbconnect.inc.php";
-$_SESSION["isInvited"] = false;
-?>    
-    <script>
-        setInterval(() => {
-        <?php
+
+if (isset($_POST["function"])){
+    if($_POST["function"] == "check_incoming_invite"){
+        if(isset($_SESSION['UserId']) && $_SESSION["isInvited"] == false && $_SESSION["isPlaying"] != true){
+            $sql = "SELECT * FROM invite WHERE invitee=$uid LIMIT 1";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+    
+            if($stmt->rowCount() > 0){
+                // We got an invite.
+                $_SESSION['isInvited'] = true;
+    
+                $resInvite = $stmt->fetch();
+                $inviteId = $resInvite['inviteId'];
+                $gameId = $resInvite['gameId'];
+    
+                $data = [
+                    "isInvited"=>true,
+                    "inviteId"=>$inviteId,
+                    "gameId"=>$gameId
+                ];
+    
+                echo json_encode($data);
+            } else {
+                // No invite, so do nothing.
+                $data = [
+                    "isInvited"=> false
+                ];
+                echo json_encode($data);
+            }
+        }
+
+    } else if($_POST["function"] == "accept_invite"){
+        
+        $inviteId = $_POST["inviteId"];
+        $gameId = $_POST["gameId"];
+
+        $conn->beginTransaction();
+        $sql2 = "DELETE FROM invite WHERE inviteId = :inviteId;";
+        $stmt2 = $conn->prepare($sql2);
+        $success2 = $stmt2.execute(["inviteId"=>$inviteId]);
+
+        if ($success2){
+            //Delete successfull
+            //Now update game record
             
-
-            if(isset($_SESSION['UserId']) && $_SESSION["isInvited"] == false){
-                $sql = "SELECT * FROM invite WHERE invitee=$uid LIMIT 1";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-
-                if($stmt->rowCount() > 0){
-                    // Add Name of the invitee here.
-                    $_SESSION['isInvited'] = true;
-                    
-                    // After processing an invite, we will remove it from the invite from the invite table.
-                    $resInvite = $stmt->fetch();
-                    $inviteId = $resInvite['inviteId'];
-                    $gameId = $resInvite['gameId'];
-
-                    $conn->beginTransaction();
-                    $sql2 = "DELETE FROM invite WHERE inviteId = $inviteId;";
-                    
-                    $stmt2 = $conn->prepare($sql2);
-
-                    $success2 = $stmt2.execute();
-
-                    if ($success2){
-                        ?>
-
-                        if(confirm("You have been invited to a game. Accept?") == true){
-                            // invitee chose to play. 
-                            // We will update the game record, with p2 = current user.
-                            <?php
-                                $sql3 = "UPDATE game SET p2=$uid WHERE gameId=$gameId;"
-
-                                $stmt3 = $conn-preepare($soql3);
-                                $success3 = $stmt3->execute();
-
-                                if($success3){
-                                    $_SESSION['isPlaying'] = TRUE;
-                                    $conn->commit();
-
-                                    $sql5 = "SELECT * FROM game WHERE gameId=$gameId";
-                                    $stmt5 = $conn->prepare($sql5);
-                                    $stmt5->execute();
-                                    $resGame = $stmt5.fethc();
-                                    
-                                    $gameType = $resGame["gameType"];
-
-                                    if($gameType == 1){
-                                        header("Location: games/tictac.php");
-                                    }
-                                    
-
-                                
-                                } else{
-                                    $conn->rollback();
-                                }
-
-                            ?>
-
-                        } else{
-                            // Invitee chose not to accept.
-                            // in that case we are going to delete the game record from game table.
-                            
-                            <?php
-                                // No need to prepare statement with place holder because the gameId came from our own Query and NOT the user.
-                                $sql4 = "DELETE FROM game WHERE gameId=$gameId";
-
-                                $stmt4  = $conn->prepare($sql4);
-                                $success4 = $stmt4.execute();
-                                
-                                if ($success4){
-                                    $conn->commit();
-                                    $_SESSION['isInvited'] = FALSE;
-                                    
-                                } else {
-                                    $conn->rollback();
-                                    $_SESSION["isInvited"] = TRUE;
-                                    $_SESSION["isPlaying"] = FALSE;
-                                }
-
-                            ?>
-                            
-
-                        }
+            $sql3 = "UPDATE game SET p2=$uid WHERE gameId=:gameId";
+            $stmt3 = $conn->prepare($sql3);
+            $success3 = $stmt3->execute(["gameId=>$gameId"]);
+            if($success3){
 
 
-
-                    <?php 
-                    } else {
-                        $conn->rollback();
-                    }
-
-
-                ?>
+                $sql5 = "SELECT * FROM game WHERE gameId=$gameId";
+                $stmt5 = $conn->prepare($sql5);
+                $stmt5->execute();
+                $resGame = $stmt5.fetch();
                 
-                    
+                $gameType = $resGame["gameType"];
+                $_SESSION['OpponentId'] = $resGame['p1'];
+                $_SESSION['GameId'] = $resGame['gameId'];
+                $_SESSION['LocalBoard'] = $resGame['board'];
+                $_SESSION["MySymbol"] = "O";
+                $_SESSION["isInvited"] = FALSE;
+                $_SESSION['isPlaying'] = TRUE;
 
+                $conn->commit();
 
-                <?php 
-                } else{
-                    // Do nothing
-                }
+                $status = TRUE;
+                $msg = "Invite Accepted!";
+    
+                $data = [
+                    "status" => $status,
+                    "msg" => $msg
+                ];
+    
+    
+                echo json_encode($data);
+                
+
+            
+            } else{
+                // Failed to upate game record.
+                $conn->rollback();
+                $status = FALSE;
+                $errorMsg = "Database Update Failed!";
+    
+                $data = [
+                    "status" => $status,
+                    "msg" => $errorMsg
+                ];
+    
+    
+                echo json_encode($data);
             }
 
-        ?>
+        } else {
+            // Deletion of invite record failed.
+            $conn->rollback();
+            $status = FALSE;
+            $errorMsg = "Database Update Failed!";
 
-        }, 1500);
-    </script>
+            $data = [
+                "status" => $status,
+                "msg" => $errorMsg
+            ];
+
+
+            echo json_encode($data);
+        
+        }
+
+    } else if($_POST["function"] == "reject_invite"){
+        $inviteId = $_POST["inviteId"];
+        $gameId = $_POST["gameId"];
+
+        $conn->beginTransaction();
+        $sql2 = "DELETE FROM invite WHERE inviteId = :inviteId;";
+        $stmt2 = $conn->prepare($sql2);
+        $success2 = $stmt2.execute(["inviteId"=>$inviteId]);
+
+        if($success2){
+            $sql3 = "DELETE FROM game WHERE gameId = :gameId;";
+            $stmt3 = $conn->prepare($sql3);
+            $success3 = $stmt3.execute(["gameId"=>$gameId]);
+
+            if($success3){
+                $_SESSION["isInvited"] = FALSE;
+                $_SESSION["isPlaying"] = FALSE;
+                $_SESSION["GameId"] = NULL;
+                $_SESSION["OpponentId"] = NULL;
+                $_SESSION["LocalBoard"] = NULL;
+
+                $conn->commit();
+                $status = TRUE;
+                $msg = "Invite Rejected!";
+    
+                $data = [
+                    "status" => $status,
+                    "msg" => $msg
+                ];
+    
+                echo json_encode($data);
+
+            } else {
+                // Game record deleting failed.
+                $conn->rollback();
+                $status = FALSE;
+                $errorMsg = "Database Update Failed!";
+    
+                $data = [
+                    "status" => $status,
+                    "msg" => $errorMsg
+                ];
+    
+    
+                echo json_encode($data);
+            }
+
+        } else {
+            // Delete invite record failed.
+            $conn->rollback();
+            $status = FALSE;
+            $errorMsg = "Database Update Failed!";
+
+            $data = [
+                "status" => $status,
+                "msg" => $errorMsg
+            ];
+
+            echo json_encode($data);
+        }
+
+    }
+}
+
+
+
+
+
+

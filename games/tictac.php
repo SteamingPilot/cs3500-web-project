@@ -1,5 +1,8 @@
 <?php 
     include "../includes/session.inc.php";
+    include "../includes/dbconnect.inc.php";
+    include "../helper/tictac-utility-functions.php";
+    include "../actions/check-incoming-invite.php";
 ?>
 
 <!DOCTYPE html>
@@ -28,18 +31,28 @@
     <script>
         $(function(){
             <?php 
+                echo '$("#newGame").hide();';
+                echo '$("#gameAndScoreBoard").hide();';
+                echo '$("#waitingForFriend").hide();';
                 if($uid == NULL){
+                    // User's not logged in
                     echo '$("#notLoggedInContaier").show();';
+
                 } else{
                     echo '$("#notLoggedInContaier").hide();';
 
                     if($uIsPlaying == FALSE){
+                        // User Logged in
+                        // user not playing with anyone
                         echo '$("#newGame").show();';
-                        echo '$("#gameAndScoreBoard").hide();';
-                        echo '$("#waitingForFriend").hide();';
+                        
                     } else{
+                        // User is connected to someone.
                         echo '$("#newGame").hide();';
                         echo '$("#gameAndScoreBoard").show();';
+                        
+                        echo '$(#game button).html(" ")';
+                        
                     }
                 }
 
@@ -49,37 +62,151 @@
             $("#invite_submit").click(function (e) {                 
                 e.preventDefault();
 
-                $.post("../actions/invitePlayer.php", {
-                    "invite_submit":"True",
-                    "email": $("#email").val(),
-                    "board": "---------",
-                    "gameType": 1    
-                },
+                $.post("../actions/invitePlayer.php", 
+                    {
+                        "invite_submit":"True",
+                        "email": $("#email").val(),
+                        "board": "---------",
+                        "gameType": 1    
+                    },
                     function (data, textStatus, jqXHR) {
-                        console.log(data)
                         if(data=="Success"){
+                            // Successfully sent the invite
                             $('#waitingForFriend').show();
                             $("#newGame").hide();
-
-                            <?php 
-                            $_SESSION['isPlaying'] = true;
-                            ?>
 
                         } else if(data == "InvalidEmail"){
                             alert("No User Found with the emial. Try again");
                         } else if(data=="Failed"){
-                            alert("Something went wrong. Try again Later.")
+                            alert("Something went wrong. Try again Later.");
                         }
                     }
                 );    
                 
             });
 
+            // Checking if friend has accepted invitation from current user (if sent any)
+            setInterval(() => {
+                <?php 
+                    check_friend_accepted_invite();
+                ?>
+            }, 1500);
 
 
-    
+            // checkin if any invitation was received.
+            setInterval(() => {
+                formData = {
+                    "function": "check_incoming_invite"
+                }
 
-        });
+                $.ajax({
+                        type:  "POST",
+                        url: "../actions/check-incoming-invite.php",
+                        data: formData,
+                        success: function(data) {
+                            console.log(data);
+                            if(data["isInvited"] == TRUE){
+                                if(confirm("You have been invited to a game. Accept?") == true){
+                                    // invitee chose to play. 
+                                    // We will update the game record, with p2 = current user.
+                                    formData2 = {
+                                    "function": "accept_invite",
+                                    "inviteId": $data['inviteId'],
+                                    "gameId": $data["gameId"]
+                                    }
+                                    $.ajax({
+                                            type:  "POST",
+                                            url: "../actions/check-incoming-invite.php",
+                                            data: formData2,
+                                            success: function(data) {
+                                                if(data["status"] == TRUE){
+                                                    console.log("success")
+
+                                                } else {
+                                                    alert(data["msg"]);
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                                alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
+                                            }
+                                    });
+                                } else {
+                                    // rejected invite.
+                                    formData3 = {
+                                    "function": "reject_invite",
+                                    "inviteId": $data['inviteId'],
+                                    "gameId": $data["gameId"]
+                                    }
+                                    $.ajax({
+                                            type:  "POST",
+                                            url: "../actions/check-incoming-invite.php",
+                                            data: formData3,
+                                            success: function(data) {
+                                                if(data["status"] == TRUE){
+                                                    alert("Successfully Rejected!");
+                                                } else {
+                                                    alert(data["msg"]);
+                                                }
+                                            },
+                                            error: function(jqXHR, textStatus, errorThrown) {
+                                                alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
+                                            }
+                                    });
+                                }
+
+                                
+                            } else {
+                                // No invitation. So, Do nothing
+                            }
+                        },
+                });
+
+            }, 1500 );
+
+
+
+            $("#game button").click(function (e) { 
+                e.preventDefault();
+               
+                if((this.innerHTML == "X") || (this.innerHTML == "O")){
+                    // Do nothing.
+                } else {
+                    formData = {
+                        "buttonClicked": TRUE,
+                        "id": parseInt(this.id[1])
+                    }
+
+                    $.ajax({
+                        type:  "POST",
+                        url: "../helper/tictac-play.php",
+                        data: formData,
+                        success: function(returnData) {
+                            if(returnData["status"] == FALSE){
+                                if(returnData["msg"] == "Database Update Failed!"){
+                                    alert("Database Update Failed! Try again.");
+                                } else if (returnData['msg'] == "Not My Turn!"){
+                                    //Do nothing.
+                                }
+                            } else {
+                                if(returnData['msg'] == "Successfully Played the Turn"){
+                                    this.innerHTML = <?php 
+                                        if(isset($_SESSION["MySymbol"])){
+                                            echo $_SESSION["MySymbol"];
+                                        } else {
+                                            echo "X";
+                                        }
+                                        ?>;
+                                }
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
+                        }
+                    });
+                }
+            });
+    });
+
     </script>
     
 
@@ -352,9 +479,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     
 
-    <?php
-        include "../actions/check-incoming-invite.php";
-    ?>
 
 </body>
 </html>
