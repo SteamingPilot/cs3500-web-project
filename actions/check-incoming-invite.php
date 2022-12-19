@@ -7,7 +7,7 @@ if(!isset($_SESSION['UserId'])){
 
 if (isset($_POST["function"])){
     if($_POST["function"] == "check_incoming_invite"){
-        if(isset($_SESSION['UserId']) && /*$_SESSION["isInvited"] == false &&*/ $_SESSION["isPlaying"] != true){
+        if(isset($_SESSION['UserId']) && $_SESSION["isInvited"] == false && $_SESSION["isPlaying"] != true){
             $uid = $_SESSION['UserId'];
             $sql = "SELECT * FROM invite WHERE invitee=$uid LIMIT 1";
             $stmt = $conn->prepare($sql);
@@ -20,23 +20,15 @@ if (isset($_POST["function"])){
                 $resInvite = $stmt->fetch();
                 $inviteId = $resInvite['inviteId'];
                 $gameId = $resInvite['gameId'];
-    
-                // $data = [
-                //     "isInvited"=>"true",
-                //     "inviteId"=>$inviteId,
-                //     "gameId"=>$gameId
-                // ];
 
-                $data["isInvited"] = "true";
-                $data["inviteId"] = $inviteId;
-                $data["gameId"] = $gameId;
+                $data['isInvited'] = 'true';
+                $data['inviteId'] = $inviteId;
+                $data['gameId'] = $gameId;
     
                 echo json_encode($data);
             } else {
                 // No invite, so do nothing.
-                $data = [
-                    "isInvited"=> false
-                ];
+                $data["isInvited"] = "false";
                 echo json_encode($data);
             }
         }
@@ -47,24 +39,23 @@ if (isset($_POST["function"])){
         $gameId = $_POST["gameId"];
 
         $conn->beginTransaction();
-        $sql2 = "DELETE FROM invite WHERE inviteId = :inviteId;";
+        $sql2 = "DELETE FROM invite WHERE inviteId = :inviteId";
         $stmt2 = $conn->prepare($sql2);
-        $success2 = $stmt2.execute(["inviteId"=>$inviteId]);
+        $success2 = $stmt2->execute(["inviteId"=>$inviteId]);
 
         if ($success2){
             //Delete successfull
             //Now update game record
             
-            $sql3 = "UPDATE game SET p2=$uid WHERE gameId=:gameId";
+            $sql3 = "UPDATE game SET p2=:UserId WHERE gameId=:gameId";
             $stmt3 = $conn->prepare($sql3);
-            $success3 = $stmt3->execute(["gameId=>$gameId"]);
+            $success3 = $stmt3->execute(["gameId"=>$gameId, "UserId"=>$_SESSION['UserId']]);
             if($success3){
-
 
                 $sql5 = "SELECT * FROM game WHERE gameId=$gameId";
                 $stmt5 = $conn->prepare($sql5);
                 $stmt5->execute();
-                $resGame = $stmt5.fetch();
+                $resGame = $stmt5->fetch();
                 
                 $gameType = $resGame["gameType"];
                 $_SESSION['OpponentId'] = $resGame['p1'];
@@ -78,12 +69,9 @@ if (isset($_POST["function"])){
 
                 $status = TRUE;
                 $msg = "Invite Accepted!";
-    
-                $data = [
-                    "status" => $status,
-                    "msg" => $msg
-                ];
-    
+
+                $data["status"] = $status;
+                $data["msg"] = $msg;
     
                 echo json_encode($data);
                 
@@ -94,11 +82,9 @@ if (isset($_POST["function"])){
                 $conn->rollback();
                 $status = FALSE;
                 $errorMsg = "Database Update Failed!";
-    
-                $data = [
-                    "status" => $status,
-                    "msg" => $errorMsg
-                ];
+
+                $data["status"] = $status;
+                $data["msg"] = $errorMsg;
     
     
                 echo json_encode($data);
@@ -110,14 +96,11 @@ if (isset($_POST["function"])){
             $status = FALSE;
             $errorMsg = "Database Update Failed!";
 
-            $data = [
-                "status" => $status,
-                "msg" => $errorMsg
-            ];
+            $data["status"] = $status;
+            $data["msg"] = $errorMsg;
 
 
             echo json_encode($data);
-        
         }
 
     } else if($_POST["function"] == "reject_invite"){
@@ -144,12 +127,10 @@ if (isset($_POST["function"])){
                 $conn->commit();
                 $status = TRUE;
                 $msg = "Invite Rejected!";
-    
-                $data = [
-                    "status" => $status,
-                    "msg" => $msg
-                ];
-    
+                    
+                $data["status"] = $status;
+                $data["msg"] = $msg;
+
                 echo json_encode($data);
 
             } else {
@@ -157,12 +138,9 @@ if (isset($_POST["function"])){
                 $conn->rollback();
                 $status = FALSE;
                 $errorMsg = "Database Update Failed!";
-    
-                $data = [
-                    "status" => $status,
-                    "msg" => $errorMsg
-                ];
-    
+                
+                $data["status"] = $status;
+                $data["msg"] = $errorMsg;
     
                 echo json_encode($data);
             }
@@ -173,10 +151,8 @@ if (isset($_POST["function"])){
             $status = FALSE;
             $errorMsg = "Database Update Failed!";
 
-            $data = [
-                "status" => $status,
-                "msg" => $errorMsg
-            ];
+            $data["status"] = $status;
+            $data["msg"] = $errorMsg;
 
             echo json_encode($data);
         }

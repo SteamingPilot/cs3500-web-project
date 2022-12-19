@@ -23,6 +23,7 @@
                     $_SESSION["OpponentId"] = NULL;
                     $_SESSION["GameId"] = NULL;
                     $_SESSION["LocalBoard"] = NULL;
+                    $_SESSION["isInvited"] = False;
                     header("Location: index.php");
                 } else {
 

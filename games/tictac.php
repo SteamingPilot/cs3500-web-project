@@ -3,9 +3,6 @@
     include "../includes/dbconnect.inc.php";
     include "../helper/tictac-utility-functions.php";
     include "../actions/check-incoming-invite.php";
-
-    $x = 10;
-    echo $x;
 ?>
 
 <!DOCTYPE html>
@@ -106,65 +103,74 @@
                         type:  "POST",
                         url: "../actions/check-incoming-invite.php",
                         data: formData,
-                        success: function(data) {
-                            console.log(data);
-                            if(data.isInvited = "true"){
-                                if(confirm("You have been invited to a game. Accept?") == true){
-                                    // invitee chose to play. 
-                                    // We will update the game record, with p2 = current user.
-                                    formData2 = {
-                                    "function": "accept_invite",
-                                    "inviteId": data.inviteId,
-                                    "gameId": data.gameId
-                                    }
-                                    $.ajax({
-                                            type:  "POST",
-                                            url: "../actions/check-incoming-invite.php",
-                                            data: formData2,
-                                            success: function(data) {
-                                                if(data["status"] == TRUE){
-                                                    console.log("success")
-
-                                                } else {
-                                                    alert(data["msg"]);
+                        success: function(response) {
+                            if(response != ""){
+                                var data = JSON.parse(response);
+                                if(data.isInvited == "true"){
+                                    if(confirm("You have been invited to a game. Accept?") == true){
+                                        // invitee chose to play. 
+                                        // We will update the game record, with p2 = current user.
+                                        formData2 = {
+                                        "function": "accept_invite",
+                                        "inviteId": data.inviteId,
+                                        "gameId": data.gameId
+                                        }
+                                        $.ajax({
+                                                type:  "POST",
+                                                url: "../actions/check-incoming-invite.php",
+                                                data: formData2,
+                                                success: function(response2) {
+                                                    if(response2 != ""){
+                                                        var data2 = JSON.parse(response2);
+                                                        if(data2.status == true){
+                                                            alert("Successfully Accepted")
+                                                        } else {
+                                                            alert(data2.msg);
+                                                        }
+                                                    }
+                                                    
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                    alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
                                                 }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown) {
-                                                alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
-                                            }
-                                    });
+                                        });
+                                    } else {
+                                        // rejected invite.
+                                        formData3 = {
+                                        "function": "reject_invite",
+                                        "inviteId": data.inviteId,
+                                        "gameId": data.gameId
+                                        }
+                                        $.ajax({
+                                                type:  "POST",
+                                                url: "../actions/check-incoming-invite.php",
+                                                data: formData3,
+                                                success: function(response3) {
+                                                    if(response3 != ""){
+                                                        var data3 = JSON.parse(response3);
+                                                        if(data3["status"] == TRUE){
+                                                            alert("Successfully Rejected!");
+                                                        } else {
+                                                            alert(data["msg"]);
+                                                        }
+                                                    }
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                    alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
+                                                }
+                                        });
+                                    }
+
+                                    
                                 } else {
-                                    // rejected invite.
-                                    formData3 = {
-                                    "function": "reject_invite",
-                                    "inviteId": $data['inviteId'],
-                                    "gameId": $data["gameId"]
-                                    }
-                                    $.ajax({
-                                            type:  "POST",
-                                            url: "../actions/check-incoming-invite.php",
-                                            data: formData3,
-                                            success: function(data) {
-                                                if(data["status"] == true){
-                                                    alert("Successfully Rejected!");
-                                                } else {
-                                                    alert(data["msg"]);
-                                                }
-                                            },
-                                            error: function(jqXHR, textStatus, errorThrown) {
-                                                alert("Error, status = " + textStatus +", " + "Error Thrown: " + errorThrown);
-                                            }
-                                    });
+                                    // No invitation. So, Do nothing
                                 }
-
-                                
-                            } else {
-                                // No invitation. So, Do nothing
                             }
+                            
                         },
                 });
 
-            }, 5000 );
+            }, 1500);
 
 
 
@@ -175,7 +181,7 @@
                     // Do nothing.
                 } else {
                     formData = {
-                        "buttonClicked": true,
+                        "buttonClicked": TRUE,
                         "id": parseInt(this.id[1])
                     }
 
