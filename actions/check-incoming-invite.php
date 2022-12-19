@@ -1,9 +1,14 @@
 <?php
 include "../includes/dbconnect.inc.php";
 
+if(!isset($_SESSION['UserId'])){
+    session_start();
+}
+
 if (isset($_POST["function"])){
     if($_POST["function"] == "check_incoming_invite"){
-        if(isset($_SESSION['UserId']) && $_SESSION["isInvited"] == false && $_SESSION["isPlaying"] != true){
+        if(isset($_SESSION['UserId']) && /*$_SESSION["isInvited"] == false &&*/ $_SESSION["isPlaying"] != true){
+            $uid = $_SESSION['UserId'];
             $sql = "SELECT * FROM invite WHERE invitee=$uid LIMIT 1";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -16,11 +21,15 @@ if (isset($_POST["function"])){
                 $inviteId = $resInvite['inviteId'];
                 $gameId = $resInvite['gameId'];
     
-                $data = [
-                    "isInvited"=>true,
-                    "inviteId"=>$inviteId,
-                    "gameId"=>$gameId
-                ];
+                // $data = [
+                //     "isInvited"=>"true",
+                //     "inviteId"=>$inviteId,
+                //     "gameId"=>$gameId
+                // ];
+
+                $data["isInvited"] = "true";
+                $data["inviteId"] = $inviteId;
+                $data["gameId"] = $gameId;
     
                 echo json_encode($data);
             } else {

@@ -1,4 +1,8 @@
 <?php
+
+    $x = 10;
+    echo $x;
+    
     session_start();
 
     if(isset($_SESSION['UserId'])){
@@ -160,6 +164,12 @@
 
     <br>
     <br><br><br>
+
+    <?php
+        for ($i=0; $i < 10; $i++) { 
+            echo "<p>Hello World</p>";
+        }
+    ?>
 
     <!-- BootStarp Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

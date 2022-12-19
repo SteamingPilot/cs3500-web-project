@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2022 at 05:11 AM
+-- Generation Time: Dec 17, 2022 at 08:17 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,6 +39,16 @@ CREATE TABLE `game` (
   `gameType` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`gameId`, `p1`, `p2`, `turn`, `board`, `wins`, `losses`, `draws`, `gameType`) VALUES
+(1670646839, 4, NULL, NULL, '---------', NULL, NULL, NULL, 1),
+(1670648139, 1, NULL, NULL, '---------', NULL, NULL, NULL, 1),
+(1671135786, 2, NULL, NULL, '---------', NULL, NULL, NULL, 1),
+(1671135912, 2, NULL, NULL, '---------', NULL, NULL, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +61,16 @@ CREATE TABLE `invite` (
   `inviter` int(11) NOT NULL,
   `gameId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invite`
+--
+
+INSERT INTO `invite` (`inviteId`, `invitee`, `inviter`, `gameId`) VALUES
+(10, 1, 4, 1670646839),
+(11, 2, 1, 1670648139),
+(12, 1, 2, 1671135786),
+(13, 1, 2, 1671135912);
 
 -- --------------------------------------------------------
 
@@ -74,7 +94,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`Id`, `FirstName`, `LastName`, `Email`, `Password`, `isPlaying`) VALUES
 (1, 'Paul', 'Palok', 'md.palok@gmail.com', '$2y$10$2R12ps3pviE1A/V9EZuT/OJz3V1I2pO030tBkF8aswJ3yv1BNrpqa', 0),
 (2, 'Tarin', 'Nurany', 'tarin@gmail.com', '$2y$10$axlJrOF606ybXpRuKrkojuRWhtEdhPUIpfQYP1MG9zPOpc3nMTQmu', 0),
-(3, 'Abir', 'Palok', 'abir.palok@hotmail.com', '$2y$10$FavdV/0BQh35tA6Ws9PoD.R3dkYjoHPRAlArIjGbQ91Qjf3VveXRG', 0);
+(3, 'Abir', 'Palok', 'abir.palok@hotmail.com', '$2y$10$FavdV/0BQh35tA6Ws9PoD.R3dkYjoHPRAlArIjGbQ91Qjf3VveXRG', 0),
+(4, 'Taseen', 'Hakim', 'taseen.hakim@gmail.com', '$2y$10$/qrwdKeWJq5d0okFpljDLexZdjVG.5aIPWx4GfoVuAGLgNZlfqu4a', 0),
+(5, 'Steaming', 'Pilot', 'steaming.pilot@gmail', '$2y$10$qulG9KT857nqYWpDOGXJseQlm418YjTZVHDsgmX8Yo7P16lRLFyou', 0);
 
 --
 -- Indexes for dumped tables
@@ -113,13 +135,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `invite`
 --
 ALTER TABLE `invite`
-  MODIFY `inviteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `inviteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

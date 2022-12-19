@@ -3,6 +3,9 @@
     include "../includes/dbconnect.inc.php";
     include "../helper/tictac-utility-functions.php";
     include "../actions/check-incoming-invite.php";
+
+    $x = 10;
+    echo $x;
 ?>
 
 <!DOCTYPE html>
@@ -105,14 +108,14 @@
                         data: formData,
                         success: function(data) {
                             console.log(data);
-                            if(data["isInvited"] == TRUE){
+                            if(data.isInvited = "true"){
                                 if(confirm("You have been invited to a game. Accept?") == true){
                                     // invitee chose to play. 
                                     // We will update the game record, with p2 = current user.
                                     formData2 = {
                                     "function": "accept_invite",
-                                    "inviteId": $data['inviteId'],
-                                    "gameId": $data["gameId"]
+                                    "inviteId": data.inviteId,
+                                    "gameId": data.gameId
                                     }
                                     $.ajax({
                                             type:  "POST",
@@ -142,7 +145,7 @@
                                             url: "../actions/check-incoming-invite.php",
                                             data: formData3,
                                             success: function(data) {
-                                                if(data["status"] == TRUE){
+                                                if(data["status"] == true){
                                                     alert("Successfully Rejected!");
                                                 } else {
                                                     alert(data["msg"]);
@@ -161,7 +164,7 @@
                         },
                 });
 
-            }, 1500 );
+            }, 5000 );
 
 
 
@@ -172,7 +175,7 @@
                     // Do nothing.
                 } else {
                     formData = {
-                        "buttonClicked": TRUE,
+                        "buttonClicked": true,
                         "id": parseInt(this.id[1])
                     }
 
