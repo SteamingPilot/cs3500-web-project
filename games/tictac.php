@@ -3,6 +3,13 @@
     include "../includes/dbconnect.inc.php";
     include "../helper/tictac-utility-functions.php";
     include "../actions/check-incoming-invite.php";
+
+    if(isset($_GET["rejected"])){
+        if($_GET["rejected"] == "true"){
+            echo '<script>alert("Your friend rejected your invite.");</script>';
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,17 +48,18 @@
                 } else{
                     echo '$("#notLoggedInContaier").hide();';
 
-                    if($uIsPlaying == FALSE){
+                    if($_SESSION["isPlaying"] == FALSE){
                         // User Logged in
                         // user not playing with anyone
                         echo '$("#newGame").show();';
                         
                     } else{
-                        // User is connected to someone.
+                        // User is playing with someone.
                         echo '$("#newGame").hide();';
                         echo '$("#gameAndScoreBoard").show();';
                         
-                        echo '$(#game button).html(" ")';
+                        // echo '$(#game button).html(" ");';
+                        echo "$('#game button').html(' ');";
                         
                     }
                 }
@@ -59,6 +67,7 @@
                 
             ?>
 
+            // Inviting a Friend
             $("#invite_submit").click(function (e) {                 
                 e.preventDefault();
 
@@ -87,9 +96,29 @@
 
             // Checking if friend has accepted invitation from current user (if sent any)
             setInterval(() => {
-                <?php 
-                    check_friend_accepted_invite();
-                ?>
+                formData = {
+                    "function": "check_invite_accept"
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "../actions/check-incoming-invite.php",
+                    data: formData,
+                    success: function (response) {
+                        if(response != ""){
+                            var data = JSON.parse(response);
+                            console.log(data);
+                            if(data.status == "waiting"){
+                                // Do Nothing
+                            } else if(data.status == "accepted"){
+                                location.replace("./tictac.php");
+                            } else if(data.status == "rejected"){
+                                location.replace("./tictac.php?rejected=true");
+                            }
+                        }
+
+                    }
+                });
             }, 1500);
 
 
@@ -123,7 +152,7 @@
                                                     if(response2 != ""){
                                                         var data2 = JSON.parse(response2);
                                                         if(data2.status == true){
-                                                            alert("Successfully Accepted")
+                                                            location.replace("./tictac.php");
                                                         } else {
                                                             alert(data2.msg);
                                                         }
@@ -148,10 +177,10 @@
                                                 success: function(response3) {
                                                     if(response3 != ""){
                                                         var data3 = JSON.parse(response3);
-                                                        if(data3["status"] == TRUE){
+                                                        if(data3.status == true){
                                                             alert("Successfully Rejected!");
                                                         } else {
-                                                            alert(data["msg"]);
+                                                            alert(data.msg);
                                                         }
                                                     }
                                                 },
